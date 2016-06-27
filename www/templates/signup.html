@@ -1,0 +1,29 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <div class="buttons">
+      <button class="button button-light" ng-click="closeSignUp()">
+        <i class="icon ion-chevron-left"></i> Back
+      </button>
+    </div>
+    <h1 class="title">Sign Up</h1>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doSignUp()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="signUpData.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="signUpData.password">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Confirm Password</span>
+          <input type="password" ng-model="signUpData.confirmPassword">
+        </label>
+        <button class="button button-full button-positive" type="submit">Sign Up</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

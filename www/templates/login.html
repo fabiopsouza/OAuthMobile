@@ -1,0 +1,54 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-light" ng-click="signUp()">
+        <i class="icon ion-compose"></i> Sign Up
+      </button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item">
+          <div class="row">
+            <div class="col">
+              <button class="button button-block button-positive" style="background-color: #3d5b99">
+                <i class="icon ion-social-facebook"></i>
+              </button>
+            </div>
+            <div class="col">
+              <button class="button button-block button-positive" style="background-color: #e25714">
+                <i class="icon ion-social-google"></i>
+              </button>
+            </div>
+            <div class="col">
+              <button class="button button-block button-positive" style="background-color: #00aced">
+                <i class="icon ion-social-twitter"></i>
+              </button>
+            </div>
+            <div class="col">
+              <button class="button button-block button-dark">
+                <i class="icon ion-social-github"></i>
+              </button>
+            </div>
+          </div>
+        </label>
+
+        <div class="item item-divider" style="text-align: center">
+            OR
+        </div>
+
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="loginData.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <button class="button button-full  button-positive" type="submit">Log in</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
