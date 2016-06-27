@@ -8,37 +8,37 @@
     </div>
   </ion-header-bar>
   <ion-content>
+    <div class="list">
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="doFacebookLogin()" style="background-color: #3d5b99">
+            <i class="icon ion-social-facebook"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="doGoogleLogin()" style="background-color: #e25714">
+            <i class="icon ion-social-google"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="doTwitterLogin()" style="background-color: #00aced">
+            <i class="icon ion-social-twitter"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-dark" ng-click="doGithubLogin()">
+            <i class="icon ion-social-github"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="item item-divider" style="text-align: center">
+        OR
+      </div>
+    </div>
+
     <form ng-submit="doLogin()">
       <div class="list">
-        <label class="item">
-          <div class="row">
-            <div class="col">
-              <button class="button button-block button-positive" style="background-color: #3d5b99">
-                <i class="icon ion-social-facebook"></i>
-              </button>
-            </div>
-            <div class="col">
-              <button class="button button-block button-positive" style="background-color: #e25714">
-                <i class="icon ion-social-google"></i>
-              </button>
-            </div>
-            <div class="col">
-              <button class="button button-block button-positive" style="background-color: #00aced">
-                <i class="icon ion-social-twitter"></i>
-              </button>
-            </div>
-            <div class="col">
-              <button class="button button-block button-dark">
-                <i class="icon ion-social-github"></i>
-              </button>
-            </div>
-          </div>
-        </label>
-
-        <div class="item item-divider" style="text-align: center">
-            OR
-        </div>
-
         <label class="item item-input">
           <span class="input-label">Email</span>
           <input type="text" ng-model="loginData.email">

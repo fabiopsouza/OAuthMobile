@@ -61,27 +61,6 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup) {
     $scope.signUpModal.hide();
   };
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-
-    if ($scope.loginData == null || $scope.loginData.email == null || $scope.loginData.password == null) {
-      $scope.showAlert('Falha', 'Digite um e-mail e uma senha');
-      return;
-    }
-
-    firebase.auth().signInWithEmailAndPassword($scope.loginData.email, $scope.loginData.password)
-      .catch(function(error) {
-        $scope.showAlert('Falha', getFirebaseErrorMessage(error.code), error.message);
-      });
-  };
-
-  // Triggered in the  slide menu to signUp account
-  $scope.doLogout = function() {
-    firebase.auth().signOut().then(function() {}, function(error) {
-      console.log(error.message);
-    });
-  };
-
   // Perform the signUp action when the user submits the signUp form
   $scope.doSignUp = function() {
     if ($scope.signUpData == null || $scope.signUpData.email == null ||
@@ -104,6 +83,60 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup) {
     $scope.signUpData = {};
     $scope.closeLogin();
     $scope.closeSignUp();
+  };
+
+  // Perform the login action when the user submits the login form
+  $scope.doLogin = function() {
+
+    if ($scope.loginData == null || $scope.loginData.email == null || $scope.loginData.password == null) {
+      $scope.showAlert('Falha', 'Digite um e-mail e uma senha');
+      return;
+    }
+
+    firebase.auth().signInWithEmailAndPassword($scope.loginData.email, $scope.loginData.password)
+      .catch(function(error) {
+        $scope.showAlert('Falha', getFirebaseErrorMessage(error.code), error.message);
+      });
+  };
+
+  // Triggered in the  slide menu to signUp account
+  $scope.doLogout = function() {
+    firebase.auth().signOut().then(function() {}, function(error) {
+      console.log(error.message);
+    });
+  };
+
+  // Perform the facebook login action
+  $scope.doFacebookLogin = function() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function(result) {}).catch(function(error) {
+      console.log(error.message);
+    });
+  };
+
+  // Perform the google login action
+  $scope.doGoogleLogin = function() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
+    firebase.auth().signInWithRedirect(provider).then(function(result) {}).catch(function(error) {
+      console.log(error.message);
+    });
+  };
+
+  // Perform the twitter login action
+  $scope.doTwitterLogin = function() {
+    var provider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function(result) {}).catch(function(error) {
+      $scope.showAlert('Falha', getFirebaseErrorMessage(error.code), error);
+    });
+  };
+
+  // Perform the github login action
+  $scope.doGithubLogin = function() {
+    var provider = new firebase.auth.GithubAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function(result) {}).catch(function(error) {
+      $scope.showAlert('Falha', getFirebaseErrorMessage(error.code), error);
+    });
   };
 
   // Generic Alert
