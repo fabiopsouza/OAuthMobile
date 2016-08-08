@@ -1,21 +1,19 @@
-starter.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup) {
+starter.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $location, $ionicHistory) {
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.$on('$ionicView.enter', function(e) {
+  $scope.$on('$ionicView.beforeEnter', function(e) {
     firebase.auth().onAuthStateChanged(function(user) {
+
       if (user) {
         $scope.user = user;
-        $scope.closeLogin();
         $scope.loginData = {};
+
+        if($ionicHistory.currentView().stateId == 'login')
+          $location.path("/playlists");
       } else {
-        $scope.login();
+        $location.path("/login");
       }
+
+      $scope.$apply();
     });
   });
 
@@ -31,25 +29,10 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup) {
     hardwareBackButtonClose: false
   };
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', modalOptions).then(function(modal) {
-    $scope.loginModal = modal;
-  });
-
   // Create the signup modal
   $ionicModal.fromTemplateUrl('templates/signup.html', modalOptions).then(function(modal) {
     $scope.signUpModal = modal;
   });
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.loginModal.show();
-  };
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.loginModal.hide();
-  };
 
   // Open the signUp modal
   $scope.signUp = function() {
@@ -76,12 +59,10 @@ starter.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup) {
 
     firebase.auth().createUserWithEmailAndPassword($scope.signUpData.email, $scope.signUpData.password)
       .catch(function(error) {
-        console.log(error);
         $scope.showAlert('Falha', getFirebaseErrorMessage(error.code), error.message);
       });
 
     $scope.signUpData = {};
-    $scope.closeLogin();
     $scope.closeSignUp();
   };
 
